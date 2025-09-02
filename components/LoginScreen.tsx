@@ -32,7 +32,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     <>
       <header className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
-          GitHub Sprint
+          GitHub Year in Review
         </h1>
         <p className="text-gray-400 mt-2">Generate your Strava-like coding summary.</p>
       </header>

@@ -1,20 +1,18 @@
 import React, { useRef, useCallback } from 'react';
-import { toPng } from 'html-to-image';
 import type { GitHubStats, TimeFrame } from '../types';
 import StatItem from './StatItem';
 import RadarChart from './RadarChart';
-import { BackIcon, GitHubIcon, DownloadIcon } from './icons';
+import { BackIcon, GitHubIcon } from './icons';
 
 interface StatsImageProps {
   stats: GitHubStats;
   backgroundImageUrl: string;
   onReset: () => void;
-  onClose: () => void;
   timeFrame: TimeFrame;
   date: Date;
 }
 
-const StatsImage: React.FC<StatsImageProps> = ({ stats, backgroundImageUrl, onReset, onClose, timeFrame, date }) => {
+const StatsImage: React.FC<StatsImageProps> = ({ stats, backgroundImageUrl, onReset, timeFrame, date }) => {
   const imageRef = useRef<HTMLDivElement>(null);
 
   const formatNumber = (num: number): string => {
@@ -32,36 +30,6 @@ const StatsImage: React.FC<StatsImageProps> = ({ stats, backgroundImageUrl, onRe
     return `${date.getFullYear()} Review`;
   };
   
-  const handleDownloadImage = useCallback(async () => {
-    if (!imageRef.current) return;
-    
-    try {
-      const dataUrl = await toPng(imageRef.current, {
-        quality: 1.0,
-        pixelRatio: 2,
-        backgroundColor: '#1f2937',
-      });
-      
-      const link = document.createElement('a');
-      link.download = `github-sprint-${stats.username}-${timeFrame}-${date.getFullYear()}.png`;
-      link.href = dataUrl;
-      link.click();
-    } catch (error) {
-      console.error('Error generating image:', error);
-    }
-  }, [stats.username, timeFrame, date]);
-
-  const handleShareOnX = useCallback(() => {
-    const text = encodeURIComponent(`Check out my GitHub Sprint stats! 🚀 #GitHubSprint #Coding #Developer`);
-    const url = `https://twitter.com/intent/tweet?text=${text}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }, []);
-
-  const handleResetAndClose = useCallback(() => {
-    onReset();
-    onClose();
-  }, [onReset, onClose]);
-
   const allStats = [
     { label: 'Commits', value: formatNumber(stats.totalCommits) },
     { label: 'Pull Requests', value: formatNumber(stats.totalPRs) },
@@ -192,25 +160,9 @@ const StatsImage: React.FC<StatsImageProps> = ({ stats, backgroundImageUrl, onRe
             </div>
         </div>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <div className="mt-6 flex justify-center">
              <button
-                onClick={handleDownloadImage}
-                className="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500 transition-colors"
-            >
-                <DownloadIcon className="w-5 h-5"/>
-                Download Image
-            </button>
-             <button
-                onClick={handleShareOnX}
-                className="flex-1 flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-500 transition-colors"
-            >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-                Share on X
-            </button>
-             <button
-                onClick={handleResetAndClose}
+                onClick={onReset}
                 className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors"
             >
                 <BackIcon className="w-5 h-5"/>

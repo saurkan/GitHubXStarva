@@ -6,9 +6,10 @@ interface GitHubInputFormProps {
   onGenerate: (imageFile: File, options: { timeFrame: TimeFrame; date: Date }) => void;
   error: string | null;
   onLogout: () => void;
+  onClose: () => void;
 }
 
-const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, onLogout }) => {
+const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, onLogout, onClose }) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [localError, setLocalError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -173,7 +174,10 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
 
       <div className="flex flex-col sm:flex-row gap-4">
         <button
-            onClick={onLogout}
+            onClick={() => {
+              onLogout();
+              onClose();
+            }}
             type="button"
             className="flex-1 flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors"
         >
@@ -184,7 +188,7 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
             type="submit"
             className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500 transition-transform transform hover:scale-105"
         >
-            Generate Review
+            Generate Sprint
         </button>
       </div>
     </form>

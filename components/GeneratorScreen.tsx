@@ -3,7 +3,7 @@ import type { GitHubStats, TimeFrame } from '../types';
 import { fetchRealGitHubStats } from '../services/githubService';
 import GitHubInputForm from './GitHubInputForm';
 import StatsImage from './StatsImage';
-import { LoaderIcon } from './icons';
+import { LoaderIcon, BackIcon } from './icons';
 
 interface GeneratorScreenProps {
   githubUrl: string;

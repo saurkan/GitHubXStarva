@@ -3,16 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale-1.0" />
-    <title>GitHub Year in Review</title>
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,700,600&display=swap" rel="stylesheet">
+    <title>GitHub Sprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Clash Grotesk"', 'sans-serif'],
+            sans: ['Roboto', 'sans-serif'],
           },
+          colors: {
+            'material-dark': {
+              'surface': '#121212',
+              'surface-variant': '#1e1e1e',
+              'surface-container': '#1f1f1f',
+              'surface-container-high': '#2c2c2c',
+              'on-surface': '#e1e1e1',
+              'on-surface-variant': '#c4c4c4',
+              'primary': '#bb86fc',
+              'primary-variant': '#3700b3',
+              'secondary': '#03dac6',
+              'error': '#cf6679',
+            }
+          },
+          boxShadow: {
+            'material': '0 2px 4px rgba(0,0,0,0.2), 0 4px 8px rgba(0,0,0,0.14), 0 1px 10px rgba(0,0,0,0.12)',
+            'material-lg': '0 8px 16px rgba(0,0,0,0.2), 0 16px 32px rgba(0,0,0,0.14), 0 4px 40px rgba(0,0,0,0.12)',
+          }
         },
       },
     }
@@ -29,7 +48,7 @@
 }
 </script>
 </head>
-  <body class="bg-gray-900 text-white font-sans">
+  <body class="bg-material-dark-surface text-material-dark-on-surface font-sans">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

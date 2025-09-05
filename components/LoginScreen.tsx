@@ -31,15 +31,24 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   return (
     <>
       <header className="text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">
-          GitHub Year in Review
+        <h1 className="text-4xl md:text-5xl font-light tracking-wide text-material-dark-on-surface">
+          GitHub Sprint
         </h1>
-        <p className="text-gray-400 mt-2">Generate your Strava-like coding summary.</p>
+        <p className="text-material-dark-on-surface-variant mt-3 text-lg">Generate your coding analytics summary</p>
       </header>
-      <div className="bg-gray-800 rounded-2xl shadow-2xl shadow-indigo-900/20 overflow-hidden border border-gray-700">
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+      <div 
+        className="bg-material-dark-surface-variant rounded-2xl shadow-material-lg overflow-hidden border border-material-dark-surface-container relative"
+        style={{
+          backgroundImage: 'url(/Untitled-design-22-1-2048x1152.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-material-dark-surface/90 backdrop-blur-sm"></div>
+        <form onSubmit={handleSubmit} className="relative p-8 space-y-6">
           <div>
-            <label htmlFor="github-url" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="github-url" className="block text-sm font-medium text-material-dark-on-surface mb-3 flex items-center gap-2">
+              <span className="material-icons text-base">link</span>
               GitHub Profile URL
             </label>
             <input
@@ -48,12 +57,13 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               placeholder="https://github.com/username"
-              className="w-full bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full bg-material-dark-surface-container border border-material-dark-surface-container-high rounded-lg px-4 py-3 text-material-dark-on-surface placeholder-material-dark-on-surface-variant focus:outline-none focus:ring-2 focus:ring-material-dark-primary focus:border-material-dark-primary transition-all"
             />
           </div>
 
           <div>
-            <label htmlFor="github-token" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="github-token" className="block text-sm font-medium text-material-dark-on-surface mb-3 flex items-center gap-2">
+              <span className="material-icons text-base">key</span>
               GitHub Personal Access Token
             </label>
             <input
@@ -62,29 +72,34 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
               value={githubToken}
               onChange={(e) => setGithubToken(e.target.value)}
               placeholder="ghp_..."
-              className="w-full bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full bg-material-dark-surface-container border border-material-dark-surface-container-high rounded-lg px-4 py-3 text-material-dark-on-surface placeholder-material-dark-on-surface-variant focus:outline-none focus:ring-2 focus:ring-material-dark-primary focus:border-material-dark-primary transition-all"
             />
-            <p className="mt-2 text-xs text-gray-500">
-              A token with <code className="bg-gray-900 px-1 rounded">read:user</code> and <code className="bg-gray-900 px-1 rounded">public_repo</code> scopes is required. Your token is not stored.
+            <p className="mt-3 text-xs text-material-dark-on-surface-variant">
+              A token with <code className="bg-material-dark-surface px-2 py-1 rounded text-material-dark-secondary">read:user</code> and <code className="bg-material-dark-surface px-2 py-1 rounded text-material-dark-secondary">public_repo</code> scopes is required. Your token is not stored.
             </p>
           </div>
           
           {error && (
-            <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-2 rounded-md text-sm">
+            <div className="bg-material-dark-error/20 border border-material-dark-error/50 text-material-dark-error px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+              <span className="material-icons text-base">error</span>
               {error}
             </div>
           )}
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500 transition-transform transform hover:scale-105"
+            className="w-full bg-material-dark-primary hover:bg-material-dark-primary-variant text-material-dark-surface font-medium py-4 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-material-dark-primary transition-all duration-200 transform hover:scale-105 shadow-material flex items-center justify-center gap-2"
           >
+            <span className="material-icons">arrow_forward</span>
             Continue
           </button>
         </form>
       </div>
-      <footer className="text-center mt-8 text-gray-500 text-sm space-y-1">
-          <p>Stats generated using the official GitHub API.</p>
+      <footer className="text-center mt-8 text-material-dark-on-surface-variant text-sm space-y-1">
+          <p className="flex items-center justify-center gap-2">
+            <span className="material-icons text-base">api</span>
+            Stats generated using the official GitHub API
+          </p>
       </footer>
     </>
   );

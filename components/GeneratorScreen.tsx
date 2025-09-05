@@ -71,10 +71,10 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ githubUrl, githubToke
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex flex-col items-center justify-center text-center p-8 h-96">
-          <LoaderIcon className="w-16 h-16 animate-spin text-indigo-400" />
-          <p className="mt-4 text-lg text-gray-300">Fetching real GitHub data...</p>
-          <p className="text-sm text-gray-500">This may take a moment.</p>
+        <div className="flex flex-col items-center justify-center text-center p-12 h-96">
+          <div className="w-16 h-16 border-4 border-material-dark-primary border-t-transparent rounded-full animate-spin mb-6"></div>
+          <p className="mt-4 text-lg text-material-dark-on-surface font-medium">Fetching real GitHub data...</p>
+          <p className="text-sm text-material-dark-on-surface-variant mt-2">This may take a moment.</p>
         </div>
       );
     }
@@ -91,14 +91,14 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ githubUrl, githubToke
   return (
     <>
       <header className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tighter">
-          Generate Your Review
+        <h1 className="text-3xl md:text-4xl font-light tracking-wide text-material-dark-on-surface">
+          Generate Your Sprint
         </h1>
-        <p className="text-gray-400 mt-2">
-            Logged in as <code className="bg-gray-900 text-indigo-300 px-2 py-1 rounded-md">{username}</code>.
+        <p className="text-material-dark-on-surface-variant mt-3">
+            Logged in as <code className="bg-material-dark-surface text-material-dark-secondary px-3 py-1 rounded-lg font-medium">{username}</code>
         </p>
       </header>
-      <div className="bg-gray-800 rounded-2xl shadow-2xl shadow-indigo-900/20 overflow-hidden border border-gray-700">
+      <div className="bg-material-dark-surface-variant rounded-2xl shadow-material-lg overflow-hidden border border-material-dark-surface-container">
         {renderContent()}
       </div>
     </>

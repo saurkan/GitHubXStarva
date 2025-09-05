@@ -54,7 +54,7 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
           value={selectedDate.toISOString().split('T')[0]}
           max={dateString}
           onChange={(e) => setSelectedDate(new Date(e.target.value))}
-          className="w-full bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="w-full bg-material-dark-surface-container border border-material-dark-surface-container-high rounded-lg px-4 py-3 text-material-dark-on-surface focus:outline-none focus:ring-2 focus:ring-material-dark-primary focus:border-material-dark-primary transition-all"
         />
       );
     }
@@ -68,14 +68,14 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
            <select 
              value={selectedDate.getMonth()} 
              onChange={(e) => setSelectedDate(new Date(selectedDate.getFullYear(), parseInt(e.target.value), 1))}
-             className="w-full bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-material-dark-surface-container border border-material-dark-surface-container-high rounded-lg px-4 py-3 text-material-dark-on-surface focus:outline-none focus:ring-2 focus:ring-material-dark-primary transition-all"
             >
               {months.map((month, index) => <option key={month} value={index}>{month}</option>)}
            </select>
            <select 
              value={selectedDate.getFullYear()} 
              onChange={(e) => setSelectedDate(new Date(parseInt(e.target.value), selectedDate.getMonth(), 1))}
-             className="w-full bg-gray-700 border border-gray-600 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-material-dark-surface-container border border-material-dark-surface-container-high rounded-lg px-4 py-3 text-material-dark-on-surface focus:outline-none focus:ring-2 focus:ring-material-dark-primary transition-all"
             >
               {years.map(year => <option key={year} value={year}>{year}</option>)}
             </select>
@@ -92,10 +92,10 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
             key={year}
             type="button"
             onClick={() => setSelectedDate(new Date(year, 0, 1))}
-            className={`flex-1 px-4 py-2 text-sm font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+            className={`flex-1 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-material-dark-primary shadow-material ${
               selectedDate.getFullYear() === year
-                ? 'bg-indigo-600 text-white' 
-                : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                ? 'bg-material-dark-primary text-material-dark-surface' 
+                : 'bg-material-dark-surface-container hover:bg-material-dark-surface-container-high text-material-dark-on-surface-variant'
             }`}
           >
             {year}
@@ -106,9 +106,19 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-8 space-y-6">
+    <div 
+      className="relative"
+      style={{
+        backgroundImage: 'url(/Untitled-design-22-1-2048x1152.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-material-dark-surface/90 backdrop-blur-sm"></div>
+      <form onSubmit={handleSubmit} className="relative p-8 space-y-6">
        <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-material-dark-on-surface mb-3 flex items-center gap-2">
+          <span className="material-icons text-base">schedule</span>
           Time Frame
         </label>
         <div className="flex space-x-2">
@@ -117,10 +127,10 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
                     key={tf}
                     type="button"
                     onClick={() => setTimeFrame(tf)}
-                    className={`flex-1 px-4 py-2 text-sm font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 capitalize ${
+                    className={`flex-1 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-material-dark-primary capitalize shadow-material ${
                         timeFrame === tf
-                        ? 'bg-indigo-600 text-white' 
-                        : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                        ? 'bg-material-dark-primary text-material-dark-surface' 
+                        : 'bg-material-dark-surface-container hover:bg-material-dark-surface-container-high text-material-dark-on-surface-variant'
                     }`}
                 >
                     {tf}
@@ -130,28 +140,30 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
       </div>
       
        <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-material-dark-on-surface mb-3 flex items-center gap-2">
+          <span className="material-icons text-base">date_range</span>
           Select Period
         </label>
         {renderDateSelector()}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-material-dark-on-surface mb-3 flex items-center gap-2">
+          <span className="material-icons text-base">image</span>
           Background Image
         </label>
         <div 
           onClick={triggerFileSelect}
-          className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-600 border-dashed rounded-md cursor-pointer hover:border-indigo-500 transition-colors"
+          className="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-material-dark-surface-container border-dashed rounded-lg cursor-pointer hover:border-material-dark-primary transition-colors bg-material-dark-surface-container/30"
         >
           <div className="space-y-1 text-center">
-            <UploadIcon className="mx-auto h-12 w-12 text-gray-400" />
-            <div className="flex text-sm text-gray-400">
+            <span className="material-icons text-4xl text-material-dark-on-surface-variant mx-auto block">cloud_upload</span>
+            <div className="flex text-sm text-material-dark-on-surface-variant justify-center">
               <p className="pl-1">
                 {imageFile ? imageFile.name : 'Upload a file or drag and drop'}
               </p>
             </div>
-            <p className="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
+            <p className="text-xs text-material-dark-on-surface-variant">PNG, JPG, GIF up to 5MB</p>
           </div>
         </div>
         <input
@@ -166,7 +178,8 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
       </div>
 
       {(error || localError) && (
-        <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-2 rounded-md text-sm">
+        <div className="bg-material-dark-error/20 border border-material-dark-error/50 text-material-dark-error px-4 py-3 rounded-lg text-sm flex items-center gap-2">
+          <span className="material-icons text-base">error</span>
           {error || localError}
         </div>
       )}
@@ -175,19 +188,21 @@ const GitHubInputForm: React.FC<GitHubInputFormProps> = ({ onGenerate, error, on
         <button
             onClick={onLogout}
             type="button"
-            className="flex-1 flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 bg-material-dark-surface-container hover:bg-material-dark-surface-container-high text-material-dark-on-surface font-medium py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-material-dark-surface-container-high transition-all duration-200 shadow-material"
         >
-            <BackIcon className="w-5 h-5"/>
+            <span className="material-icons">arrow_back</span>
             Change User
         </button>
         <button
             type="submit"
-            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500 transition-transform transform hover:scale-105"
+            className="flex-1 bg-material-dark-primary hover:bg-material-dark-primary-variant text-material-dark-surface font-medium py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-material-dark-primary transition-all duration-200 transform hover:scale-105 shadow-material flex items-center justify-center gap-2"
         >
-            Generate Review
+            <span className="material-icons">analytics</span>
+            Generate Sprint
         </button>
       </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
